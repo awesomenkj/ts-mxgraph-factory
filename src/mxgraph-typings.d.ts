@@ -2033,9 +2033,7 @@ export module mxgraph {
 	 * (code)
 	 * mxUtils.error('Browser is not supported!', 200, false);
 	 * (end)
-	 * 
-	 * Variable: errorResource
-	 * 
+	 *
 	 * Specifies the resource key for the title of the error window. If the
 	 * resource for this key does not exist then the value is used as
 	 * the title. Default is 'error'.
@@ -2045,8 +2043,6 @@ export module mxgraph {
         errorResource: string;
 
         /**
-         * Variable: closeResource
-         * 
          * Specifies the resource key for the label of the close button. If the
          * resource for this key does not exist then the value is used as
          * the label. Default is 'close'.
@@ -2054,8 +2050,6 @@ export module mxgraph {
         closeResource: string;
 
         /**
-         * Variable: errorImage
-         * 
          * Defines the image used for error dialogs.
          */
         errorImage: string;
@@ -4140,7 +4134,7 @@ export module mxgraph {
         removeGestureListeners(node: any, startListener: any, moveListener: any, endListener: any): void;
         redirectMouseEvents(node: any, graph: any, state: any, down: any, move: any, up: any, dblClick: any): void;
         release(element: any): void;
-        addMouseWheelListener(funct: any): void;
+        addMouseWheelListener(funct: any, target: any): void;
         disableContextMenu: (element: any) => void;
         getSource(evt: any): any;
         isConsumed(evt: any): boolean;
@@ -5415,6 +5409,53 @@ export module mxgraph {
      */
     export class mxPopupMenu extends mxEventSource {
         constructor(factoryMethod?: any);
+
+        /**
+         * URL of the image to be used for the submenu icon.
+         */
+        submenuImage: string;
+        /**
+         * Specifies the zIndex for the popupmenu and its shadow. Default is 10006.
+         */
+        zIndex: number;
+        /**
+         * Function that is used to create the popup menu. The function takes the
+         * current panning handler, the <mxCell> under the mouse and the mouse
+         * event that triggered the call as arguments.
+         */
+        factoryMethod: any;
+
+        /**
+         * Specifies if popupmenus should be activated by clicking the left mouse
+         * button. Default is false.
+         */
+        useLeftButtonForPopup: boolean;
+
+        /**
+         * Specifies if events are handled. Default is true.
+         */
+        enabled: boolean;
+
+        /**
+         * Contains the number of times <addItem> has been called for a new menu.
+         */
+        itemCount: number;
+
+        /**
+         * Specifies if submenus should be expanded on mouseover. Default is false.
+         */
+        autoExpand: boolean;
+
+        /**
+         * Specifies if separators should only be added if a menu item follows them.
+         * Default is false.
+         */
+        smartSeparators: boolean;
+
+        /**
+         * Specifies if any labels should be visible. Default is true.
+         */
+        labels: boolean;
         /**
          * Initializes the shapes required for this vertex handler.
          */
@@ -7224,105 +7265,73 @@ export module mxgraph {
      * spacing, orientation and offset.
      */
     export class mxStackLayout extends mxGraphLayout {
-        /**
-         * Variable: horizontal
-         *
+        /*
          * Specifies the orientation of the layout. Default is true.
          */
         horizontal: boolean;
 
-        /**
-         * Variable: spacing
-         *
+        /*
          * Specifies the spacing between the cells. Default is 0.
          */
         spacing: number;
-        /**
-         * Variable: x0
-         *
+        /*
          * Specifies the horizontal origin of the layout. Default is 0.
          */
         x0: number;
-        /**
-         * Variable: y0
-         *
+        /*
          * Specifies the vertical origin of the layout. Default is 0.
          */
         y0: number;
-        /**
-         * Variable: border
-         *
+        /*
          * Border to be added if fill is true. Default is 0.
          */
         border: number;
-        /**
-         * Variable: marginTop
-         *
+        /*
          * Top margin for the child area. Default is 0.
          */
         marginTop: number;
-        /**
-         * Variable: marginLeft
-         *
+        /*
          * Left margin for the child area. Default is 0.
          */
         marginLeft: number;
-        /**
-         * Variable: marginRight
-         *
+        /*
          * Right margin for the child area. Default is 0.
          */
         marginRight: number;
-        /**
-         * Variable: marginBottom
-         *
+        /*
          * Bottom margin for the child area. Default is 0.
          */
         marginBottom: number;
-        /**
-         * Variable: keepFirstLocation
-         *
+        /*
          * Boolean indicating if the location of the first cell should be
          * kept, that is, it will not be moved to x0 or y0.
          */
         keeoFirstLocation: boolean;
-        /**
-         * Variable: fill
-         *
+        /*
          * Boolean indicating if dimension should be changed to fill out the parent
          * cell. Default is false.
          */
         fill: boolean;
-        /**
-         * Variable: resizeParent
-         *
+        /*
          * If the parent should be resized to match the width/height of the
          * stack. Default is false.
          */
         resizeParent: boolean;
-        /**
-         * Variable: resizeParentMax
-         *
+        /*
          * Use maximum of existing value and new value for resize of parent.
          * Default is false.
          */
         resizeParentMax: boolean;
-        /**
-         * Variable: resizeLast
-         *
+        /*
          * If the last element should be resized to fill out the parent. Default is
          * false. If <resizeParent> is true then this is ignored.
          */
         resizeLast: boolean;
-        /**
-         * Variable: wrap
-         *
+        /*
          * Value at which a new column or row should be created. Default is null.
          */
         wrap: boolean;
-        /**
-         * Variable: borderCollapse
-         *
+        /*
          * If the strokeWidth should be ignored. Default is true.
          */
         borderCollapse: boolean;
@@ -16351,6 +16360,93 @@ export module mxgraph {
      */
     export class mxOutline {
         constructor(source: any, container: any);
+
+        /**
+         * Function: source
+         * 
+         * Reference to the source <mxGraph>.
+         */
+        source: any;
+
+        /**
+         * Function: outline
+         * 
+         * Reference to the <mxGraph> that renders the outline.
+         */
+        outline: any;
+
+        /**
+         * Function: graphRenderHint
+         * 
+         * Renderhint to be used for the outline graph. Default is faster.
+         */
+        graphRenderHint: string;
+
+        /**
+         * Specifies if events are handled. Default is true.
+         */
+        enabled: boolean;
+
+        /**
+         * Specifies a viewport rectangle should be shown. Default is true.
+         */
+        showViewport: boolean;
+
+        /**
+         * Border to be added at the bottom and right. Default is 10.
+         */
+        border: number;
+
+        /**
+         * Specifies the size of the sizer handler. Default is 8.
+         */
+        sizerSize: number;
+
+        /**
+         * Specifies if labels should be visible in the outline. Default is false.
+         */
+        labelsVisible: boolean;
+
+        /**
+         * Specifies if <update> should be called for <mxEvent.PAN> in the source
+         * graph. Default is false.
+         */
+        updateOnPan: boolean;
+
+        /**
+         * Optional <mxImage> to be used for the sizer. Default is null.
+         */
+        sizerImage: mxImage;
+
+        /**
+         * Minimum scale to be used. Default is 0.0001.
+         */
+        minScale: number;
+
+        /**
+         * Optional boolean flag to suspend updates. Default is false. This flag will
+         * also suspend repaints of the outline. To toggle this switch, use the
+         * following code.
+         * 
+         * (code)
+         * nav.suspended = !nav.suspended;
+         * 
+         * if (!nav.suspended)
+         * {
+         *   nav.update(true);
+         * }
+         * (end)
+         */
+        suspended: boolean;
+
+        /**
+         * Specifies if VML should be used to render the handles in this control. This
+         * is true for IE8 standards mode and false for all other browsers and modes.
+         * This is a workaround for rendering issues of HTML elements over elements
+         * with filters in IE 8 standards mode.
+         */
+        forceVmlHandles: boolean;
+
         /**
          * Creates the <mxGraph> used in the outline.
          */
@@ -16874,6 +16970,15 @@ export module mxgraph {
          */
         name: any;
         /**
+         * Optional float that specifies the horizontal offset of the constraint.
+         */
+        dx: number;
+
+        /**
+         * Optional float that specifies the vertical offset of the constraint.
+         */
+        dy: number;
+        /**
          * Constructs a new connection constraint for the given point and boolean
          * arguments.
          *
@@ -16882,7 +16987,7 @@ export module mxgraph {
          * @param perimeter - Optional boolean that specifies if the fixed point should be
          * projected onto the perimeter of the terminal. Default is true.
          */
-        constructor(point?: mxPoint, perimeter?: boolean, name?: string);
+        constructor(point?: mxPoint, perimeter?: boolean, name?: string, dx?: number, dy?: number);
     }
 
     /**
@@ -16905,6 +17010,124 @@ export module mxgraph {
      */
     export class mxGraphHandler {
         constructor(graph: any);
+        /**
+         * Reference to the enclosing <mxGraph>.
+         */
+        graph: any;
+
+        /**
+         * Defines the maximum number of cells to paint subhandles
+         * for. Default is 50 for Firefox and 20 for IE. Set this
+         * to 0 if you want an unlimited number of handles to be
+         * displayed. This is only recommended if the number of
+         * cells in the graph is limited to a small number, eg.
+         * 500.
+         */
+        maxCells: number;
+
+        /**
+         * Specifies if events are handled. Default is true.
+         */
+        enabled: boolean;
+
+        /**
+         * Specifies if drop targets under the mouse should be enabled. Default is
+         * true.
+         */
+        highlightEnabled: boolean;
+
+        /**
+         * Specifies if cloning by control-drag is enabled. Default is true.
+         */
+        cloneEnabled: boolean;
+
+        /**
+         * Specifies if moving is enabled. Default is true.
+         */
+        moveEnabled: boolean;
+        /**
+         * Holds the <mxGuide> instance that is used for alignment.
+         */
+        guide: mxGuide;
+
+        /**
+         * Stores the x-coordinate of the current mouse move.
+         */
+        currentDx: any;
+
+        /**
+         * Stores the y-coordinate of the current mouse move.
+         */
+        currentDy: any;
+
+        /**
+         * Specifies if a move cursor should be shown if the mouse is over a movable
+         * cell. Default is true.
+         */
+        updateCursor: boolean;
+
+        /**
+         * Specifies if selecting is enabled. Default is true.
+         */
+        selectEnabled: boolean;
+
+        /**
+         * Specifies if cells may be moved out of their parents. Default is true.
+         */
+        removeCellsFromParent: boolean;
+
+        /**
+         * If empty parents should be removed from the model after all child cells
+         * have been moved out. Default is true.
+         */
+        removeEmptyParents: boolean;
+
+        /**
+         * Specifies if drop events are interpreted as new connections if no other
+         * drop action is defined. Default is false.
+         */
+        connectOnDrop: boolean;
+
+        /**
+         * Specifies if the view should be scrolled so that a moved cell is
+         * visible. Default is true.
+         */
+        scrollOnMove: boolean;
+
+        /**
+         * Specifies the minimum number of pixels for the width and height of a
+         * selection border. Default is 6.
+         */
+        minimumSize: number;
+
+        /**
+         * Specifies if the graph container should be used for preview. If this is used
+         * then drop target detection relies entirely on <mxGraph.getCellAt> because
+         * the HTML preview does not "let events through". Default is false.
+         */
+        htmlPreview: boolean;
+
+        /**
+         * Reference to the <mxShape> that represents the preview.
+         */
+        shape: mxShape;
+
+        /**
+         * Specifies if the bounding box should allow for rotation. Default is true.
+         */
+        rotationEnabled: boolean;
+
+        /**
+         * Maximum number of cells for which live preview should be used. Default is 0
+         * which means no live preview.
+         */
+        maxLivePreview: number;
+
+        /**
+         * If live preview is allowed on this system. Default is true for systems with
+         * SVG support.
+         */
+        allowLivePreview: boolean;
         /**
          * Specifies if other cells should be used for snapping the right, center or left side of the current selection.  Default is false.
          */
@@ -17856,6 +18079,14 @@ export module mxgraph {
          */
         setEnabled(enabled: any): void;
         /**
+         * Returns true if the given cell does not allow new connections to be created.
+         * 
+         * Parameters:
+         * 
+         * cell - <mxCell>
+         */
+        isCellEnabled(cell: mxCell): boolean;
+        /**
          * Returns <insertBeforeSource> for non-loops and false for loops.
          *
          * Parameters:
@@ -18319,6 +18550,45 @@ export module mxgraph {
     export class mxRubberband {
         constructor(graph: any);
         /**
+         * Specifies the default opacity to be used for the rubberband div. Default
+         * is 20.
+         */
+        defaultOpacity: number;
+
+        /**
+         * Specifies if events are handled. Default is true.
+         */
+        enabled: boolean;
+
+        /**
+         * Variable: div
+         * 
+         * Holds the DIV element which is currently visible.
+         */
+        div: any;
+
+        /**
+         * Holds the DIV element which is used to display the rubberband.
+         */
+        sharedDiv: any;
+
+        /**
+         * Variable: currentX
+         * 
+         * Holds the value of the x argument in the last call to <update>.
+         */
+        currentX: number;
+
+        /**
+         * Holds the value of the y argument in the last call to <update>.
+         */
+        currentY: number;
+
+        /**
+         * Optional fade out effect. Default is false.
+         */
+        fadeOut: boolean;
+        /**
          * Returns true if events are handled. This implementation returns
          * <enabled>.
          */
@@ -18503,6 +18773,89 @@ export module mxgraph {
          * Reference to the mxCellState being modified.
          */
         state: mxCellState;
+        /**
+         * Specifies if only one sizer handle at the bottom, right corner should be
+         * used. Default is false.
+         */
+        singleSizer: boolean;
+
+        /**
+         * Holds the index of the current handle.
+         */
+        index: any;
+
+        /**
+         * Specifies if the bounds of handles should be used for hit-detection in IE or
+         * if <tolerance> > 0. Default is true.
+         */
+        allowHandleBoundsCheck: boolean;
+
+        /**
+         * Optional <mxImage> to be used as handles. Default is null.
+         */
+        handleImage: mxImage;
+
+        /**
+         * Optional tolerance for hit-detection in <getHandleForEvent>. Default is 0.
+         */
+        tolerance: number;
+
+        /**
+         * Specifies if a rotation handle should be visible. Default is false.
+         */
+        rotationEnabled: boolean;
+
+        /**
+         * Specifies if the parent should be highlighted if a child cell is selected.
+         * Default is false.
+         */
+        parentHighlightEnabled: boolean;
+
+        /**
+         * Specifies if rotation steps should be "rasterized" depening on the distance
+         * to the handle. Default is true.
+         */
+        rotationRaster: boolean;
+
+        /**
+         * Specifies the cursor for the rotation handle. Default is 'crosshair'.
+         */
+        rotationCursor: string;
+
+        /**
+         * Specifies if resize should change the cell in-place. This is an experimental
+         * feature for non-touch devices. Default is false.
+         */
+        livePreview: boolean;
+
+        /**
+         * Specifies if sizers should be hidden and spaced if the vertex is small.
+         * Default is false.
+         */
+        manageSizers: boolean;
+
+        /**
+         * Specifies if the size of groups should be constrained by the children.
+         * Default is false.
+         */
+        constrainGroupByChildren: boolean;
+
+        /**
+         * Vertical spacing for rotation icon. Default is -16.
+         */
+        rotationHandleVSpacing: number;
+
+        /**
+         * The horizontal offset for the handles. This is updated in <redrawHandles>
+         * if <manageSizers> is true and the sizers are offset horizontally.
+         */
+        horizontalOffset: number;
+
+        /**
+         * The horizontal offset for the handles. This is updated in <redrawHandles>
+         * if <manageSizers> is true and the sizers are offset vertically.
+         */
+        verticalOffset: number;
         /**
          * Initializes the shapes required for this vertex handler.
          */
@@ -18811,6 +19164,142 @@ export module mxgraph {
      */
     export class mxEdgeHandler {
         constructor(state: any);
+        /**
+         * Reference to the enclosing <mxGraph>.
+         */
+        graph: any;
+
+        /**
+         * Reference to the <mxCellState> being modified.
+         */
+        state: any;
+
+        /**
+         * Holds the <mxTerminalMarker> which is used for highlighting terminals.
+         */
+        marker: any;
+
+        /**
+         * Holds the <mxConstraintHandler> used for drawing and highlighting
+         * constraints.
+         */
+        constraintHandler: mxConstraintHandler;
+
+        /**
+         * Holds the current validation error while a connection is being changed.
+         */
+        error: any;
+
+        /**
+         * Holds the <mxShape> that represents the preview edge.
+         */
+        shape: mxShape;
+
+        /**
+         * Holds the <mxShapes> that represent the points.
+         */
+        bends: any;
+
+        /**
+         * Holds the <mxShape> that represents the label position.
+         */
+        labelShape: mxShape;
+
+        /**
+         * Specifies if cloning by control-drag is enabled. Default is true.
+         */
+        cloneEnabled: boolean;
+
+        /**
+         * Specifies if adding bends by shift-click is enabled. Default is false.
+         * Note: This experimental feature is not recommended for production use.
+         */
+        addEnabled: boolean;
+
+        /**
+         * Specifies if removing bends by shift-click is enabled. Default is false.
+         * Note: This experimental feature is not recommended for production use.
+         */
+        removeEnabled: boolean;
+
+        /**
+         * Specifies if removing bends by double click is enabled. Default is false.
+         */
+        dblClickRemoveEnabled: boolean;
+
+        /**
+         * Specifies if removing bends by dropping them on other bends is enabled.
+         * Default is false.
+         */
+        mergeRemoveEnabled: boolean;
+
+        /**
+         * Specifies if removing bends by creating straight segments should be enabled.
+         * If enabled, this can be overridden by holding down the alt key while moving.
+         * Default is false.
+         */
+        straightRemoveEnabled: boolean;
+
+        /**
+         * Specifies if virtual bends should be added in the center of each
+         * segments. These bends can then be used to add new waypoints.
+         * Default is false.
+         */
+        virtualBendsEnabled: boolean;
+
+        /**
+         * Opacity to be used for virtual bends (see <virtualBendsEnabled>).
+         * Default is 20.
+         */
+        virtualBendOpacity: number;
+
+        /**
+         * Specifies if the parent should be highlighted if a child cell is selected.
+         * Default is false.
+         */
+        parentHighlightEnabled: boolean;
+
+        /**
+         * Specifies if bends should be added to the graph container. This is updated
+         * in <init> based on whether the edge or one of its terminals has an HTML
+         * label in the container.
+         */
+        preferHtml: boolean;
+
+        /**
+         * Specifies if the bounds of handles should be used for hit-detection in IE
+         * Default is true.
+         */
+        allowHandleBoundsCheck: boolean;
+
+        /**
+         * Specifies if waypoints should snap to the routing centers of terminals.
+         * Default is false.
+         */
+        snapToTerminals: boolean;
+
+        /**
+         * Optional <mxImage> to be used as handles. Default is null.
+         */
+        handleImage: mxImage;
+
+        /**
+         * Optional tolerance for hit-detection in <getHandleForEvent>. Default is 0.
+         */
+        tolerance: number;
+
+        /**
+         * Specifies if connections to the outline of a highlighted target should be
+         * enabled. This will allow to place the connection point along the outline of
+         * the highlighted target. Default is false.
+         */
+        outlineConnect: boolean;
+
+        /**
+         * Specifies if the label handle should be moved if it intersects with another
+         * handle. Uses <checkLabelHandle> for checking and moving. Default is false.
+         */
+        manageLabelHandle: boolean;
         /**
          * Initializes the shapes required for this edge handler.
          */
@@ -19608,7 +20097,34 @@ export module mxgraph {
      * Constructs a cell highlight.
      */
     export class mxCellHighlight {
-        constructor(graph: any, highlightColor: any, strokeWidth: any, dashed: any);
+        constructor(graph: any, highlightColor: any, strokeWidth: any, dashed?: any);
+        /**
+         * Specifies if the highlights should appear on top of everything
+         * else in the overlay pane. Default is false.
+         */
+        keepOnTop: boolean;
+
+        /**
+         * Reference to the enclosing <mxGraph>.
+         */
+        graph: any;
+
+        /**
+         * Reference to the <mxCellState>.
+         */
+        state: any;
+
+        /**
+         * Specifies the spacing between the highlight for vertices and the vertex.
+         * Default is 2.
+         */
+        spacing: number;
+
+        /**
+         * Holds the handler that automatically invokes reset if the highlight
+         * should be hidden.
+         */
+        resetHandler: any;
         /**
          * Sets the color of the rectangle used to highlight drop targets.
          *
@@ -21030,6 +21546,26 @@ export module mxgraph {
      */
     export class mxCodec {
         constructor(document?: any);
+        
+        /*
+         * The owner document of the codec.
+         */
+        document: any;
+
+        /*
+         * Maps from IDs to objects.
+         */
+        objects: any;
+
+        /**
+         * Lookup table for resolving IDs to elements.
+         */
+        elements: any;
+
+        /*
+         * Specifies if default values should be encoded. Default is false.
+         */
+        encodeDefaults: any;
         /**
          * Assoiates the given object with the given ID and returns the given object.
          *

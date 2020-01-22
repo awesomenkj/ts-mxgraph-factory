@@ -1,0 +1,30 @@
+{
+    "name": "ts-mxgraph-factory",
+    "description": "A tiny CommonJS wrapper for mxGraph",
+    "keywords": [
+        "mxgraph",
+        "typescript"
+    ],
+    "version": "4.0.6",
+    "bugs": "https://github.com/rabpeter/ts-mxgraph-factory/issues",
+    "license": "Apache-2.0",
+    "author": "Rabpeter <de.nimitz@yandex.com>",
+    "repository": "rabpeter/ts-mxgraph-factory",
+    "scripts": {
+        "prepare": "webpack"
+    },
+    "main": "./index.js",
+    "types": "./index.d.ts",
+    "devDependencies": {
+        "@types/node": "12.12.7",
+        "copy-webpack-plugin": "5.0.5",
+        "exports-loader": "0.7.0",
+        "mxgraph": "4.0.6",
+        "ts-loader": "6.2.1",
+        "tslint": "5.20.1",
+        "tslint-loader": "3.5.4",
+        "typescript": "3.7.2",
+        "webpack": "4.41.2",
+        "webpack-cli": "3.3.10"
+    }
+}

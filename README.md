@@ -1,4 +1,4 @@
-# mxGraph Factory
+# Typescript mxGraph Factory
 
 ## Overview
 

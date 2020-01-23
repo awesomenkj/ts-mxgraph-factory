@@ -48,6 +48,7 @@ export module mxgraph {
         IS_VML: boolean;
         IS_WIN: boolean;
         IS_MAC: boolean;
+        IS_CHROMEOS: boolean;
         IS_TOUCH: boolean;
         IS_POINTER: boolean;
         IS_LOCAL: boolean;
@@ -4890,6 +4891,98 @@ export module mxgraph {
     export class mxDragSource {
         constructor(element: any, dropHandler: any);
         /**
+         * Reference to the DOM node which was made draggable.
+         */
+        element: any;
+
+        /**
+         * Holds the DOM node that is used to represent the drag preview. If this is
+         * null then the source element will be cloned and used for the drag preview.
+         */
+        dropHandler: any;
+
+        /**
+         * <mxPoint> that specifies the offset of the <dragElement>. Default is null.
+         */
+        dragOffset: mxPoint;
+
+        /**
+         * Holds the DOM node that is used to represent the drag preview. If this is
+         * null then the source element will be cloned and used for the drag preview.
+         */
+        dragElement: any;
+
+        /**
+         * Optional <mxRectangle> that specifies the unscaled size of the preview.
+         */
+        previewElement: mxRectangle;
+
+        /**
+         * Specifies if this drag source is enabled. Default is true.
+         */
+        enabled: boolean;
+
+        /**
+         * Reference to the <mxGraph> that is the current drop target.
+         */
+        currentGraph: any;
+
+        /**
+         * Holds the current drop target under the mouse.
+         */
+        currentDropTarget: any;
+
+        /**
+         * Holds the current drop location.
+         */
+        currentPoint: any;
+
+        /**
+         * Holds an <mxGuide> for the <currentGraph> if <dragPreview> is not null.
+         */
+        currentGuide: mxGuide;
+
+        /**
+         * Holds an <mxGuide> for the <currentGraph> if <dragPreview> is not null.
+         */
+        currentHighlight: any;
+
+        /**
+         * Specifies if the graph should scroll automatically. Default is true.
+         */
+        autoscroll: boolean;
+
+        /**
+         * Specifies if <mxGuide> should be enabled. Default is true.
+         */
+        guidesEnabled: boolean;
+
+        /**
+         * Specifies if the grid should be allowed. Default is true.
+         */
+        gridEnabled: boolean;
+
+        /**
+         * Specifies if drop targets should be highlighted. Default is true.
+         */
+        highlightDropTargets: boolean;
+
+        /**
+         * ZIndex for the drag element. Default is 100.
+         */
+        dragElementZIndex: number;
+
+        /**
+         * Opacity of the drag element in %. Default is 70.
+         */
+        dragElementOpacity: number;
+
+        /**
+         * Whether the event source should be checked in <graphContainerEvent>. Default
+         * is true.
+         */
+        checkEventSource: boolean;
+        /**
          * Returns <enabled>.
          */
         isEnabled(): any;
@@ -7335,7 +7428,7 @@ export module mxgraph {
          * If the strokeWidth should be ignored. Default is true.
          */
         borderCollapse: boolean;
-        constructor(graph: any, horizontal: any, spacing: any, x0: any, y0: any, border: any);
+        constructor(graph: any, horizontal?: any, spacing?: any, x0?: any, y0?: any, border?: any);
         /**
          * Returns <horizontal>.
          */
@@ -7427,7 +7520,7 @@ export module mxgraph {
      * and orientation.
      */
     export class mxCompactTreeLayout extends mxGraphLayout {
-        constructor(graph: any, horizontal: any, invert: any);
+        constructor(graph: any, horizontal?: any, invert?: any);
         /**
          * Returns a boolean indicating if the given <mxCell> should be ignored as a
          * vertex. This returns true if the cell has no connections.
@@ -10483,6 +10576,97 @@ export module mxgraph {
     export class mxCellEditor {
         constructor(graph: any);
         /**
+         * Reference to the enclosing <mxGraph>.
+         */
+        graph: any;
+
+        /**
+         * Holds the DIV that is used for text editing. Note that this may be null before the first
+         * edit. Instantiated in <init>.
+         */
+        textarea: any;
+
+        /**
+         * Reference to the <mxCell> that is currently being edited.
+         */
+        editingCell: mxCell;
+
+        /**
+         * Reference to the event that was used to start editing.
+         */
+        trigger: any;
+
+        /**
+         * Specifies if the label has been modified.
+         */
+        modified: boolean;
+
+        /**
+         * Specifies if the textarea should be resized while the text is being edited.
+         * Default is true.
+         */
+        autoSize: boolean;
+
+        /**
+         * Specifies if the text should be selected when editing starts. Default is
+         * true.
+         */
+        selectText: boolean;
+
+        /**
+         * Text to be displayed for empty labels. Default is '' or '<br>' in Firefox as
+         * a workaround for the missing cursor bug for empty content editable. This can
+         * be set to eg. "[Type Here]" to easier visualize editing of empty labels. The
+         * value is only displayed before the first keystroke and is never used as the
+         * actual editing value.
+         */
+        emptyLabelText: string;
+
+        /**
+         * If true, pressing the escape key will stop editing and not accept the new
+         * value. Change this to false to accept the new value on escape, and cancel
+         * editing on Shift+Escape instead. Default is true.
+         */
+        escapeCancelsEditing: boolean;
+
+        /**
+         * Reference to the label DOM node that has been hidden.
+         */
+        textNode: string;
+
+        /**
+         * Specifies the zIndex for the textarea. Default is 5.
+         */
+        zIndex: number;
+
+        /**
+         * Defines the minimum width and height to be used in <resize>. Default is 0x20px.
+         */
+        minResize: mxRectangle;
+
+        /**
+         * Correction factor for word wrapping width. Default is 2 in quirks, 0 in IE
+         * 11 and 1 in all other browsers and modes.
+         */
+        wordWrapPadding: number;
+
+        /**
+         * If <focusLost> should be called if <textarea> loses the focus. Default is false.
+         */
+        blurEnabled: boolean;
+
+        /**
+         * Holds the initial editing value to check if the current value was modified.
+         */
+        initialValue: any;
+
+        /**
+         * Holds the current temporary horizontal alignment for the cell style. If this
+         * is modified then the current text alignment is changed and the cell style is
+         * updated when the value is applied.
+         */
+        align: any;
+        /**
          * Creates the <textarea> and installs the event listeners. The key handler
          * updates the <modified> state.
          */
@@ -10612,6 +10796,12 @@ export module mxgraph {
      * swimlane, connector, actor and cloud.
      */
     export class mxCellRenderer {
+        /**
+         * Static array that contains the globally registered shapes which are
+         * known to all instances of this class. For adding new shapes you should
+         * use the static <mxCellRenderer.registerShape> function.
+         */
+        static defaultShapes: any;
         /**
          * Registers the given constructor under the specified key in this instance
          * of the renderer.
@@ -13680,8 +13870,23 @@ export module mxgraph {
          * @param allowInvalidEdges - Optional boolean that specifies if invalid edges
          * should be cloned. Default is true.
          * @param mapping - Optional mapping for existing clones.
+         * @param keepPosition - Optional boolean indicating if the position of the cells should
+         * be updated to reflect the lost parent cell. Default is false.
          */
-        cloneCells(cells: mxCell[], allowInvalidEdges?: boolean, mapping?: any): any;
+        cloneCells(cells: mxCell[], allowInvalidEdges?: boolean, mapping?: any, keepPosition?: any): any;
+        /**
+         * Returns the clone for the given cell. Uses <cloneCells>.
+         * 
+         * Parameters:
+         * 
+         * cell - <mxCell> to be cloned.
+         * allowInvalidEdges - Optional boolean that specifies if invalid edges
+         * should be cloned. Default is true.
+         * mapping - Optional mapping for existing clones.
+         * keepPosition - Optional boolean indicating if the position of the cells should
+         * be updated to reflect the lost parent cell. Default is false.
+         */
+        cloneCell(cell: mxCell, allowInvalidEdges?: boolean, mapping?: any, keepPosition?: any): any;
         /**
          * Adds a new vertex into the given parent {@link mxCell} using value as the user
          * object and the given coordinates as the {@link mxGeometry} of the new vertex.
@@ -18443,6 +18648,26 @@ export module mxgraph {
     export class mxConstraintHandler {
         constructor(graph: any);
         /**
+         * <mxImage> to be used as the image for fixed connection points.
+         */
+        pointImage: mxImage;
+
+        /**
+         * Reference to the enclosing <mxGraph>.
+         */
+        graph: any;
+
+        /**
+         * Specifies if events are handled. Default is true.
+         */
+        enabled: boolean;
+
+        /**
+         * Specifies the color for the highlight. Default is <mxConstants.DEFAULT_VALID_COLOR>.
+         */
+        highlightColor: string;
+
+        /**
          * Returns true if events are handled. This implementation
          * returns <enabled>.
          */
@@ -19952,6 +20177,10 @@ export module mxgraph {
          */
         init(): void;
         /**
+         * Returns the <mxCellState> to be used for showing a tooltip for this event.
+         */
+        getStateForEvent(me: any): any;
+        /**
          * Handles the event by initiating a rubberband selection. By consuming the
          * event all subsequent events of the gesture are redirected to this
          * handler.
@@ -19973,7 +20202,7 @@ export module mxgraph {
         /**
          * Resets and/or restarts the timer to trigger the display of the tooltip.
          */
-        reset(me: any, restart: any): void;
+        reset(me: any, restart: any, state: any): void;
         /**
          * Hides the tooltip and resets the timer.
          */
@@ -22320,6 +22549,115 @@ export module mxgraph {
      */
     export class mxHierarchicalLayout extends mxGraphLayout {
         constructor(graph: any, orientation?: string, deterministic?: boolean);
+
+        /**
+         * Holds the array of <mxCell> that this layout contains.
+         */
+        roots: any;
+
+        /**
+         * Specifies if the parent should be resized after the layout so that it
+         * contains all the child cells. Default is false. See also <parentBorder>.
+         */
+        resizeParent: boolean;
+
+        /**
+         * Specifies if the parent location should be maintained, so that the
+         * top, left corner stays the same before and after execution of
+         * the layout. Default is false for backwards compatibility.
+         */
+        maintainParentLocation: boolean;
+
+        /**
+         * Specifies if the parent should be moved if <resizeParent> is enabled.
+         * Default is false.
+         */
+        moveParent: boolean;
+
+        /**
+         * The border to be added around the children if the parent is to be
+         * resized using <resizeParent>. Default is 0.
+         */
+        parentBorder: number;
+
+        /**
+         * The spacing buffer added between cells on the same layer. Default is 30.
+         */
+        intraCellSpacing: number;
+
+        /**
+         * The spacing buffer added between cell on adjacent layers. Default is 100.
+         */
+        interRankCellSpacing: number;
+
+        /**
+         * The spacing buffer between unconnected hierarchies. Default is 60.
+         */
+        interHierarchySpacing: number;
+
+        /**
+         * The distance between each parallel edge on each ranks for long edges.
+         * Default is 10.
+         */
+        parallelEdgeSpacing: number;
+
+        /**
+         * The position of the root node(s) relative to the laid out graph in.
+         * Default is <mxConstants.DIRECTION_NORTH>.
+         */
+        orientation: string;
+
+        /**
+         * Whether or not to perform local optimisations and iterate multiple times
+         * through the algorithm. Default is true.
+         */
+        fineTuning: boolean;
+
+        /**
+         * Whether or not to tighten the assigned ranks of vertices up towards
+         * the source cells. Default is true.
+         */
+        tightenToSource: boolean;
+
+        /**
+         * Specifies if the STYLE_NOEDGESTYLE flag should be set on edges that are
+         * modified by the result. Default is true.
+         */
+        disableEdgeStyle: boolean;
+
+        /**
+         * Whether or not to drill into child cells and layout in reverse
+         * group order. This also cause the layout to navigate edges whose 
+         * terminal vertices have different parents but are in the same 
+         * ancestry chain. Default is true.
+         */
+        traverseAncestors: boolean;
+
+        /**
+         * The internal <mxGraphHierarchyModel> formed of the layout.
+         */
+        model: any;
+
+        /**
+         * A cache of edges whose source terminal is the key
+         */
+        edgesCache: any;
+
+        /**
+         * A cache of edges whose source terminal is the key
+         */
+        edgeSourceTermCache: any;
+
+        /**
+         * A cache of edges whose source terminal is the key
+         */
+        edgesTargetTermCache: any;
+
+        /**
+         * The style to apply between cell layers to edge segments.
+         * Default is <mxHierarchicalEdgeStyle.POLYLINE>.
+         */
+        edgeStyle: number;
         /**
          * Returns the internal <mxGraphHierarchyModel> for this layout algorithm.
          */

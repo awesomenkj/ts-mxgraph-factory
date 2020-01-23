@@ -7522,6 +7522,142 @@ export module mxgraph {
     export class mxCompactTreeLayout extends mxGraphLayout {
         constructor(graph: any, horizontal?: any, invert?: any);
         /**
+         * Specifies the orientation of the layout. Default is true.
+         */
+        horizontal: boolean;	 
+
+        /**
+         * Specifies if edge directions should be inverted. Default is false.
+         */
+        invert: boolean;	 
+
+        /**
+         * If the parents should be resized to match the width/height of the
+         * children. Default is true.
+         */
+        resizeParent: boolean;
+
+        /**
+         * Specifies if the parent location should be maintained, so that the
+         * top, left corner stays the same before and after execution of
+         * the layout. Default is false for backwards compatibility.
+         */
+        maintainParentLocation: boolean;
+
+        /**
+         * Padding added to resized parents. Default is 10.
+         */
+        groupPadding: number;
+
+        /**
+         * Top padding added to resized parents. Default is 0.
+         */
+        groupPaddingTop: number;
+
+        /**
+         * Right padding added to resized parents. Default is 0.
+         */
+        groupPaddingRight: number;
+
+        /**
+         * Bottom padding added to resized parents. Default is 0.
+         */
+        groupPaddingBottom: number;
+
+        /**
+         * Left padding added to resized parents. Default is 0.
+         */
+        groupPaddingLeft: number;
+
+        /**
+         * A set of the parents that need updating based on children
+         * process as part of the layout.
+         */
+        parentsChanged: any;
+
+        /**
+         * Specifies if the tree should be moved to the top, left corner
+         * if it is inside a top-level layer. Default is false.
+         */
+        moveTree: boolean;
+
+        /**
+         * Specifies if the tree should be moved to the top, left corner
+         * if it is inside a top-level layer. Default is false.
+         */
+        visited: boolean;
+
+        /**
+         * Holds the levelDistance. Default is 10.
+         */
+        levelDistance: number;
+
+        /**
+         * Holds the nodeDistance. Default is 20.
+         */
+        nodeDistance: number;
+
+        /**
+         * Specifies if all edge points of traversed edges should be removed.
+         * Default is true.
+         */
+        resetEdges: boolean;
+
+        /**
+         * The preferred horizontal distance between edges exiting a vertex.
+         */
+        prefHozEdgeSep: number;
+
+        /**
+         * The preferred vertical offset between edges exiting a vertex.
+         */
+        prefVertEdgeOff: number;
+
+        /**
+         * The minimum distance for an edge jetty from a vertex.
+         */
+        minEdgeJetty: number;
+
+        /**
+         * The size of the vertical buffer in the center of inter-rank channels
+         * where edge control points should not be placed.
+         */
+        channelBuffer: number;
+
+        /**
+         * Whether or not to apply the internal tree edge routing.
+         */
+        edgeRouting: boolean;
+
+        /**
+         * Specifies if edges should be sorted according to the order of their
+         * opposite terminal cell in the model.
+         */
+        sortEdges: boolean;
+
+        /**
+         * Whether or not the tops of cells in each rank should be aligned
+         * across the rank
+         */
+        alignRanks: boolean;
+
+        /**
+         * An array of the maximum height of cells (relative to the layout direction)
+         * per rank
+         */
+        maxRankHeight: any;
+
+        /**
+         * The cell to use as the root of the tree
+         */
+        root: any;
+
+        /**
+         * The internal node representation of the root cell. Do not set directly
+         * , this value is only exposed to assist with post-processing functionality
+         */
+        node: any;
+        /**
          * Returns a boolean indicating if the given <mxCell> should be ignored as a
          * vertex. This returns true if the cell has no connections.
          *

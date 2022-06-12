@@ -6,10 +6,10 @@
         "typescript"
     ],
     "version": "4.0.8",
-    "bugs": "https://github.com/rabpeter/ts-mxgraph-factory/issues",
+    "bugs": "https://github.com/awesomenkj/ts-mxgraph-factory/issues",
     "license": "Apache-2.0",
-    "author": "Rabpeter <de.nimitz@yandex.com>",
-    "repository": "rabpeter/ts-mxgraph-factory",
+    "author": "awesomenkj <gitnickjeon@gmail.com>",
+    "repository": "awesomenkj/ts-mxgraph-factory",
     "scripts": {
         "prepare": "webpack"
     },
